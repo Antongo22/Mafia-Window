@@ -3,14 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mafia_Window"
-        mc:Ignorable="d" Background="#FF15171D"
+        xmlns:local="clr-namespace:Mafia_Window"  KeyDown="Window_KeyDown"
+        mc:Ignorable="d" Background="#FF15171D" AllowsTransparency="True" Style="{StaticResource VS2012WindowStyle}"
         Title="Мафия" Height="720" Width="1280" Icon="/mafiaICO.png"  WindowStartupLocation="CenterScreen" >
     <Grid Cursor="">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*" MinWidth="200"/>
             <ColumnDefinition Width="100*" MinWidth="200"/>
-            <ColumnDefinition Width="200*" MinWidth="400"/>
+            <ColumnDefinition Width="200*" MinWidth="450"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45" MaxHeight="45" MinHeight="45"/>
@@ -62,36 +62,61 @@
         <GridSplitter Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="5" 
                       Margin="0,42,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Background="#FF292929" Cursor="Arrow" />
 
-        <Button x:Name="ButtonAddPlayer" Content="Добавить" Height="19" Margin="0,10,10,0" VerticalAlignment="Top" 
-                Grid.Row="1" HorizontalAlignment="Right" Width="74"/>
-        <TextBox x:Name="TextBoxAddPlayer" Height="19" Margin="10,10,97,0" TextWrapping="Wrap" 
-                 Text="" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button x:Name="ButtonAddPlayer" Content="Добавить" Height="19" Margin="0,10,70,0" VerticalAlignment="Top" 
+                Grid.Row="1" HorizontalAlignment="Right" Width="74" Click="ButtonAddPlayer_Click"/>
+        <TextBox x:Name="TextBoxAddPlayer" Height="19" Margin="10,10,158,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Grid.Row="1" KeyDown="TextBoxAddPlayer_KeyDown"/>
         <TextBlock Height="25" TextWrapping="Wrap" Text="Имена игроков" 
                    VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"/>
-        <ListView x:Name="ListViewPlayers" Margin="10,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <ListView x:Name="ListViewPlayers" Margin="10,43,5,10" Grid.Row="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewKeyDown" Handler="ListViewItem_Rlayers_KeyDown"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
         <TextBlock Height="25" TextWrapping="Wrap" Text="Имена игроков" 
             VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"/>
 
         <TextBlock Height="25" TextWrapping="Wrap" Text="Роли" 
             VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"  Grid.Column="1"/>
-        <Button x:Name="ButtonAddRoles" Content="Добавить" Height="19" Margin="0,10,10,0" VerticalAlignment="Top" 
-        Grid.Row="1" HorizontalAlignment="Right" Width="74" Grid.Column="1"/>
-        <TextBox x:Name="TextBoxAddRoles" Height="19" Margin="10,10,97,0" TextWrapping="Wrap" 
-         Text="" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
-        <ListView x:Name="ListViewRoles" Margin="9,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1"/>
+        <Button x:Name="ButtonAddRoles" Content="Добавить" Height="18" Margin="0,11,70,0" VerticalAlignment="Top" 
+        Grid.Row="1" HorizontalAlignment="Right" Width="74" Grid.Column="1" Click="ButtonAddRoles_Click"/>
+        <TextBox x:Name="TextBoxAddRoles" Height="19" Margin="10,10,158,0" TextWrapping="Wrap" 
+         Text="" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" KeyDown="TextBoxAddRoles_KeyDown"/>
+        <ListView x:Name="ListViewRoles" Margin="9,43,5,10" Grid.Row="1" Grid.Column="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewKeyDown" Handler="ListViewItem_Roles_KeyDown"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
-        <TextBlock Height="25" TextWrapping="Wrap" Text="Итог" 
+        <TextBlock Height="25" TextWrapping="Wrap" Text="Результат" 
         VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"  Grid.Column="2"/>
 
-        <Button x:Name="ButtonOpen" Grid.Column="2" Content="Открыть" 
-                HorizontalAlignment="Right" Margin="0,7,10,0" Height="24" Width="119" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonOpen" Grid.Column="2" Content="Открыть" Margin="258,11,0,0" Height="18" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Click="ButtonOpen_Click"/>
         <Button x:Name="ButtonCopy" Grid.Column="2" Content="Скопировать"
-                HorizontalAlignment="Right" Margin="0,7,134,0" Height="24" Width="119" Grid.Row="1" VerticalAlignment="Top"/>
-        <ListView x:Name="ListViewNameRoles" Margin="9,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="2"/>
-        
-        
-        <Button x:Name="ButtonCreate" Grid.Column="2" Content="Сгенерировать" HorizontalAlignment="Left" Height="24" Margin="10,7,0,0" 
-                Grid.Row="1" VerticalAlignment="Top" Width="119"/>
+                HorizontalAlignment="Left" Margin="134,11,0,0" Height="18" Grid.Row="1" VerticalAlignment="Top" Width="119" Click="ButtonCopy_Click"/>
+        <ListView x:Name="ListViewNameRoles" Margin="9,43,5,10" Grid.Row="1" Grid.Column="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewKeyDown" Handler="ListViewItem_Result_KeyDown"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+
+        <Button x:Name="ButtonCreate" Grid.Column="2" Content="Сгенерировать" HorizontalAlignment="Left" Height="18" Margin="10,11,0,0" 
+                Grid.Row="1" VerticalAlignment="Top" Width="119" Click="ButtonCreate_Click"/>
+
+        <Button x:Name="ButtonPlayersClear" Content="Очистить" HorizontalAlignment="Right"
+                Margin="0,10,5,0" Grid.Row="1" VerticalAlignment="Top" Click="ButtonPlayersClear_Click" Height="19" Width="60"/>
+        <Button x:Name="ButtonRolesClear" Content="Очистить" HorizontalAlignment="Right"
+            Margin="0,11,5,0" Grid.Row="1" VerticalAlignment="Top" Click="ButtonRolesClear_Click" Height="18" Grid.Column="1" Width="60"/>
+        <Button x:Name="ButtonResultClear" Content="Очистить" HorizontalAlignment="Right"
+            Margin="0,11,10,0" Grid.Row="1" VerticalAlignment="Top" Width="60" Click="ButtonResultClear_Click" Height="18" Grid.Column="2"/>
 
 
     </Grid>
