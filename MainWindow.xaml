@@ -5,9 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mafia_Window"
         mc:Ignorable="d" Background="#FF15171D"
-        Title="MainWindow" Height="450" Width="800" Icon="/mafiaICO.png" >
-    <Grid>
-        <Border BorderBrush="Black" BorderThickness="1"/>
+        Title="MainWindow" Height="720" Width="1280" Icon="/mafiaICO.png" >
+    <Grid Cursor="">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*" MinWidth="200"/>
+            <ColumnDefinition Width="100*" MinWidth="200"/>
+            <ColumnDefinition Width="200*" MinWidth="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" MaxHeight="45" MinHeight="45"/>
+            <RowDefinition Height="387*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#FF334AB7"/>
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#5b73e8"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="BorderBrush" Value="#74788d"/>
+                <Setter Property="Background" Value="#2f323f"/>
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+            </Style>
+            <Style TargetType="ListView">
+                <Setter Property="Background" Value="#2f323f"/>
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+            </Style>
+        </Grid.Resources>
+
+        <GridSplitter HorizontalAlignment="Left" 
+                      Width="4" Grid.Column="1" Background="#FF292929" Margin="0,2,0,0" Grid.Row="1"/>
+        <GridSplitter HorizontalAlignment="Left" 
+                      Width="4" Grid.Column="2" Background="#FF292929" Margin="0,2,0,0" Grid.Row="1"/>
+        <GridSplitter Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="5" 
+                      Margin="0,42,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Background="#FF292929"/>
+
+        <Button x:Name="ButtonAddPlayer" Content="Добавить" Height="19" Margin="0,10,10,0" VerticalAlignment="Top" 
+                Grid.Row="1" HorizontalAlignment="Right" Width="74"/>
+        <TextBox x:Name="TextBoxAddPlayer" Height="19" Margin="10,10,97,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBlock Height="25" TextWrapping="Wrap" Text="Имена игроков" 
+                   VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"/>
+        <ListView x:Name="ListViewPlayers" Margin="10,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <TextBlock Height="25" TextWrapping="Wrap" Text="Имена игроков" 
+            VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"/>
+
+        <TextBlock Height="25" TextWrapping="Wrap" Text="Роли" 
+            VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"  Grid.Column="1"/>
+        <Button x:Name="ButtonAddRoles" Content="Добавить" Height="19" Margin="0,10,10,0" VerticalAlignment="Top" 
+        Grid.Row="1" HorizontalAlignment="Right" Width="74" Grid.Column="1"/>
+        <TextBox x:Name="TextBoxAddRoles" Height="19" Margin="10,10,97,0" TextWrapping="Wrap" 
+         Text="" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
+        <ListView x:Name="ListViewRoles" Margin="9,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1"/>
+
+        <TextBlock Height="25" TextWrapping="Wrap" Text="Итог" 
+        VerticalAlignment="Center" FontSize="17" Margin="10,0,10,0" TextAlignment="Center"  Grid.Column="2"/>
+
+        <Button x:Name="ButtonOpen" Grid.Column="2" Content="Открыть" 
+                HorizontalAlignment="Right" Margin="0,7,10,0" Height="24" Width="119" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonCopy" Grid.Column="2" Content="Скопировать"
+                HorizontalAlignment="Right" Margin="0,7,134,0" Height="24" Width="119" Grid.Row="1" VerticalAlignment="Top"/>
+        <ListView x:Name="ListViewNameRoles" Margin="9,43,5,10" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="2"/>
+        
+        
+        <Button x:Name="ButtonCreate" Grid.Column="2" Content="Сгенерировать" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" 
+                Grid.Row="1" VerticalAlignment="Top" Width="119"/>
+
 
     </Grid>
 </Window>
